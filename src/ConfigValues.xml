@@ -1,0 +1,17 @@
+<ConfigValues WorkingEnvironment="Dev" WorkingEnvironmentFolder="./" UnfilledTokensInvalidateBuild="true">
+  <Tasks>
+    <CreateConfigTask NameFormat="App.config" InputFile="./Template.App.config" OutputFolderFormat="./Configuration/{0}/" />
+  </Tasks>
+  <Parameters>
+    <ConfigParameter Name="TimesheetConnectionString">
+      <Values>
+        <ConfigParameterValue Environment="Dev" Value="Server=.\SQLEXPRESS;Database=AMPLES;Integrated Security=true;" />
+      </Values>
+    </ConfigParameter>
+    <ConfigParameter Name="TimesheetTestConnectionString">
+      <Values>
+        <ConfigParameterValue Environment="Dev" Value="Server=.\SQLEXPRESS;Database=AMPLES;Integrated Security=true;" />
+      </Values>
+    </ConfigParameter>
+  </Parameters>
+</ConfigValues>
