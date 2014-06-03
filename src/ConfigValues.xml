@@ -1,17 +1,19 @@
-<ConfigValues WorkingEnvironment="Dev" WorkingEnvironmentFolder="./" UnfilledTokensInvalidateBuild="true">
+<ConfigValues WorkingEnvironment="DEV" WorkingEnvironmentFolder="./" UnfilledTokensInvalidateBuild="true">
   <Tasks>
     <CreateConfigTask NameFormat="App.config" InputFile="./Template.App.config" OutputFolderFormat="./Configuration/{0}/" />
   </Tasks>
   <Parameters>
     <ConfigParameter Name="TimesheetConnectionString">
       <Values>
-        <ConfigParameterValue Environment="Dev" Value="Server=.\SQLEXPRESS;Database=Zetes_Timesheet;Integrated Security=true;" />
+        <ConfigParameterValue Environment="DEV" Value="Server=.\SQLEXPRESS;Database=Zetes_Timesheet;Integrated Security=true;" />
       </Values>
     </ConfigParameter>
-    <ConfigParameter Name="TimesheetTestConnectionString">
+    <ConfigParameter Name="TimesheetTestConnectionString" Default="Server=.\SQLEXPRESS;Database=Zetes_Timesheet_Test;Integrated Security=true;" />
+    <ConfigParameter Name="MonitorPath">
       <Values>
-        <ConfigParameterValue Environment="Dev" Value="Server=.\SQLEXPRESS;Database=Zetes_Timesheet_Test;Integrated Security=true;" />
+        <ConfigParameterValue Environment="DEV" Value="C:\Temp\TimesheetDropFolder" />
       </Values>
     </ConfigParameter>
+    <ConfigParameter Name="MonitorFilter"  Default="Timesheet*.xlsm" />
   </Parameters>
 </ConfigValues>
