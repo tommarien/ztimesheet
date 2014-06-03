@@ -5,12 +5,12 @@
   <Parameters>
     <ConfigParameter Name="TimesheetConnectionString">
       <Values>
-        <ConfigParameterValue Environment="Dev" Value="Server=.\SQLEXPRESS;Database=AMPLES;Integrated Security=true;" />
+        <ConfigParameterValue Environment="Dev" Value="Server=.\SQLEXPRESS;Database=Zetes_Timesheet;Integrated Security=true;" />
       </Values>
     </ConfigParameter>
     <ConfigParameter Name="TimesheetTestConnectionString">
       <Values>
-        <ConfigParameterValue Environment="Dev" Value="Server=.\SQLEXPRESS;Database=AMPLES;Integrated Security=true;" />
+        <ConfigParameterValue Environment="Dev" Value="Server=.\SQLEXPRESS;Database=Zetes_Timesheet_Test;Integrated Security=true;" />
       </Values>
     </ConfigParameter>
   </Parameters>
