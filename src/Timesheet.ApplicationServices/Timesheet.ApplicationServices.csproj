@@ -57,6 +57,7 @@
     <Compile Include="Excel\TimeEntry.cs" />
     <Compile Include="Excel\TimeEntryFilter.cs" />
     <Compile Include="Excel\TimeEntryReader.cs" />
+    <Compile Include="Monitor\ConsolidatingFileSystemMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileMonitorService.cs" />
   </ItemGroup>

@@ -1,35 +1,26 @@
 ﻿using System;
-using System.IO;
+using Timesheet.ApplicationServices.Monitor;
 
 namespace Timesheet.ApplicationServices
 {
     public class FileMonitorService
     {
-        private readonly FileSystemWatcher _fileSystemWatcher;
+        private readonly ConsolidatingFileSystemMonitor _consolidatingFileSystemMonitor;
 
-        public FileMonitorService(string path, string filter)
+        public FileMonitorService(string path, string filter, int gracePeriod)
         {
-            _fileSystemWatcher = new FileSystemWatcher(path, filter)
-            {
-                NotifyFilter = NotifyFilters.FileName
-                               | NotifyFilters.DirectoryName
-                               | NotifyFilters.LastWrite
-                               | NotifyFilters.LastAccess
-                               | NotifyFilters.Attributes
-            };
-
-            _fileSystemWatcher.Changed += (sender, e) => Console.WriteLine(e.FullPath);
-            _fileSystemWatcher.Deleted += (sender, e) => Console.WriteLine(e.FullPath + " Deleted");
+            _consolidatingFileSystemMonitor = new ConsolidatingFileSystemMonitor(path, filter) {GracePeriod = gracePeriod};
+            _consolidatingFileSystemMonitor.WhenFileChanged(Console.WriteLine);
         }
 
         public void Start()
         {
-            _fileSystemWatcher.EnableRaisingEvents = true;
+            _consolidatingFileSystemMonitor.Start();
         }
 
         public void Stop()
         {
-            _fileSystemWatcher.EnableRaisingEvents = false;
+            _consolidatingFileSystemMonitor.Stop();
         }
     }
 }

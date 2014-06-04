@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using Timesheet.ApplicationServices;
 using Topshelf;
 
@@ -16,7 +17,8 @@ namespace Timesheet.Monitor
                         {
                             s.ConstructUsing(f => new FileMonitorService(
                                 ConfigurationManager.AppSettings["Monitor.Path"]
-                                , ConfigurationManager.AppSettings["Monitor.Filter"]));
+                                , ConfigurationManager.AppSettings["Monitor.Filter"]
+                                , Convert.ToInt32(ConfigurationManager.AppSettings["Monitor.GracePeriod"])));
                             s.WhenStarted(f => f.Start());
                             s.WhenStopped(f => f.Stop());
                         });

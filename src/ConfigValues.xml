@@ -15,5 +15,6 @@
       </Values>
     </ConfigParameter>
     <ConfigParameter Name="MonitorFilter"  Default="Timesheet*.xlsm" />
+    <ConfigParameter Name="MonitorGracePeriod"  Default="250" />
   </Parameters>
 </ConfigValues>
