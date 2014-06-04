@@ -15,14 +15,6 @@ namespace Timesheet.ApplicationServices.Monitor
         private readonly Timer _timer;
         private bool _timerStarted;
 
-        public ConsolidatingFileSystemMonitor() : this(string.Empty)
-        {
-        }
-
-        public ConsolidatingFileSystemMonitor(string path) : this(path, "*.*")
-        {
-        }
-
         public ConsolidatingFileSystemMonitor(string path, string filter)
         {
             _timer = new Timer(OnTimerTriggered, null, Timeout.Infinite, Timeout.Infinite);
@@ -45,6 +37,11 @@ namespace Timesheet.ApplicationServices.Monitor
         /// The amount of ms grace period for two changes on same file to be considered as one
         /// </summary>
         public int GracePeriod { get; set; }
+
+        public string Path
+        {
+            get { return _fileSystemWatcher.Path; }
+        }
 
         public void WhenFileChanged(Action<string> action)
         {

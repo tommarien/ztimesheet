@@ -24,7 +24,7 @@ namespace Timesheet.Tests.Monitor
         {
             _changedFiles = new List<string>();
 
-            _monitor = new ConsolidatingFileSystemMonitor(TestHelper.WatchRoot) {GracePeriod = 15000};
+            _monitor = new ConsolidatingFileSystemMonitor(TestHelper.WatchRoot, "*.*") {GracePeriod = 15000};
             _monitor.WhenFileChanged(_changedFiles.Add);
             _monitor.Start();
         }

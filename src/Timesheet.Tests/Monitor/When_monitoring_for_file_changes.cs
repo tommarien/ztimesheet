@@ -24,7 +24,7 @@ namespace Timesheet.Tests.Monitor
         {
             _changedFiles = new List<string>();
 
-            _monitor = new ConsolidatingFileSystemMonitor(TestHelper.WatchRoot);
+            _monitor = new ConsolidatingFileSystemMonitor(TestHelper.WatchRoot, "*.*");
             _monitor.WhenFileChanged(_changedFiles.Add);
             _monitor.Start();
         }
