@@ -49,15 +49,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Excel\When_reading_a_time_entry_excel_file.cs" />
+    <Compile Include="Excel\When_reading_a_time_entry_excel_file_that_does_not_exist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Files\Timesheet 2014 JD.xlsm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Template.app.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Timesheet.ApplicationServices\Timesheet.ApplicationServices.csproj">
+      <Project>{8434812C-3AAD-4AF4-91CE-3A532C6545D5}</Project>
+      <Name>Timesheet.ApplicationServices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <UsingTask TaskName="ConfigBuilder" AssemblyFile="..\..\packages\ConfigBuilder.1.0.5\lib\ConfigBuilderTask.dll" />
   <Target Name="BuildConfig" BeforeTargets="BeforeBuild">

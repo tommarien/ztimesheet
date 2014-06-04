@@ -172,3 +172,10 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+/src/Timesheet.Migrations/Configuration/dev
+/src/Timesheet.Migrations/App.config
+/src/Timesheet.Monitor/Configuration/dev
+/src/Timesheet.Monitor/App.config
+/src/Timesheet.Tests/Configuration/dev
+/src/Timesheet.Tests/App.config

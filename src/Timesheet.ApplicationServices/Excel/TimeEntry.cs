@@ -15,10 +15,10 @@ namespace Timesheet.ApplicationServices.Excel
         [ExcelColumn("Type")]
         public string ActivityCode { get; set; }
 
-        public decimal Hours { get; set; }
+        public double Hours { get; set; }
 
         [ExcelColumn("Km")]
-        public decimal Kilometers { get; set; }
+        public double Kilometers { get; set; }
 
         [ExcelColumn("Customer")]
         public string CustomerCode { get; set; }

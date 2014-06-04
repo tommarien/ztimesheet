@@ -1,12 +1,16 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using LinqToExcel;
 
 namespace Timesheet.ApplicationServices.Excel
 {
     public class TimeEntryReader
     {
-        public TimeEntry[] ReadAll(string fileName, TimeEntryFilter filter)
+        public TimeEntry[] Read(string fileName, TimeEntryFilter filter)
         {
+            if (!File.Exists(fileName))
+                throw new FileNotFoundException("TimeEntry file cannot be found", fileName);
+
             using (var excelQueryFactory = new ExcelQueryFactory(fileName))
             {
                 IQueryable<TimeEntry> query = excelQueryFactory.Worksheet<TimeEntry>("Data")
@@ -16,7 +20,7 @@ namespace Timesheet.ApplicationServices.Excel
                     query = query.Where(x => x.Date < filter.Until.Value);
 
                 if (filter.SkipEmptyLines)
-                    query = query.Where(x => x.Hours > 0);
+                    query = query.Where(x => x.Hours > 0 || x.ActivityCode != null);
 
                 return query.ToArray();
             }
