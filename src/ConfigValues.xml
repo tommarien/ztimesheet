@@ -14,7 +14,7 @@
         <ConfigParameterValue Environment="DEV" Value="C:\Temp\TimesheetDropFolder" />
       </Values>
     </ConfigParameter>
-    <ConfigParameter Name="MonitorFilter"  Default="Timesheet*.xlsm" />
+    <ConfigParameter Name="MonitorFilter"  Default="Timesheet*.xls*" />
     <ConfigParameter Name="MonitorGracePeriod"  Default="250" />
   </Parameters>
 </ConfigValues>

@@ -7,9 +7,9 @@ namespace Timesheet.ApplicationServices
     {
         private readonly ConsolidatingFileSystemMonitor _consolidatingFileSystemMonitor;
 
-        public FileMonitorService(string path, string filter, int gracePeriod)
+        public FileMonitorService(ConsolidatingFileSystemMonitor fileSystemMonitor)
         {
-            _consolidatingFileSystemMonitor = new ConsolidatingFileSystemMonitor(path, filter) {GracePeriod = gracePeriod};
+            _consolidatingFileSystemMonitor = fileSystemMonitor;
             _consolidatingFileSystemMonitor.WhenFileChanged(Console.WriteLine);
         }
 

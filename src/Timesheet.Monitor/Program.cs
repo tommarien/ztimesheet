@@ -1,5 +1,4 @@
-﻿using System;
-using System.Configuration;
+﻿using Castle.Windsor;
 using Timesheet.ApplicationServices;
 using Topshelf;
 
@@ -9,18 +8,20 @@ namespace Timesheet.Monitor
     {
         private static int Main(string[] args)
         {
+            IWindsorContainer container = CreateContainer();
+
             TopshelfExitCode exitCode = HostFactory.Run(
                 config =>
                 {
                     config.Service<FileMonitorService>(
                         s =>
                         {
-                            s.ConstructUsing(f => new FileMonitorService(
-                                ConfigurationManager.AppSettings["Monitor.Path"]
-                                , ConfigurationManager.AppSettings["Monitor.Filter"]
-                                , Convert.ToInt32(ConfigurationManager.AppSettings["Monitor.GracePeriod"])));
+                            s.ConstructUsing(f => container.Resolve<FileMonitorService>());
+                            
                             s.WhenStarted(f => f.Start());
                             s.WhenStopped(f => f.Stop());
+
+                            s.WhenShutdown((service, host) => container.Release(service));
                         });
 
 
@@ -30,6 +31,15 @@ namespace Timesheet.Monitor
                 });
 
             return (int) exitCode;
+        }
+
+        private static IWindsorContainer CreateContainer()
+        {
+            var container = new WindsorContainer();
+
+            container.Install(new ApplicationServicesInstaller());
+
+            return container;
         }
     }
 }
