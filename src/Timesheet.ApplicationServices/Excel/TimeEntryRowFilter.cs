@@ -2,9 +2,9 @@
 
 namespace Timesheet.ApplicationServices.Excel
 {
-    public class TimeEntryFilter
+    public class TimeEntryRowFilter
     {
-        public TimeEntryFilter()
+        public TimeEntryRowFilter()
         {
             Until = DateTime.Now.Date;
         }

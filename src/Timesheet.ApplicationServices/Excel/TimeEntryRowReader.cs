@@ -5,22 +5,22 @@ using LinqToExcel;
 
 namespace Timesheet.ApplicationServices.Excel
 {
-    public class TimeEntryReader
+    public class TimeEntryRowReader
     {
-        public TimeEntry[] Read(string fileName, TimeEntryFilter filter)
+        public TimeEntryRow[] Read(string fileName, TimeEntryRowFilter rowFilter)
         {
             if (!File.Exists(fileName))
                 throw new FileNotFoundException("TimeEntry file cannot be found", fileName);
 
             using (var excelQueryFactory = new ExcelQueryFactory(fileName))
             {
-                IQueryable<TimeEntry> query = excelQueryFactory.Worksheet<TimeEntry>("Data")
+                IQueryable<TimeEntryRow> query = excelQueryFactory.Worksheet<TimeEntryRow>("Data")
                     .Where(x => x.Date != DateTime.MinValue);
 
-                if (filter.Until.HasValue)
-                    query = query.Where(x => x.Date < filter.Until.Value);
+                if (rowFilter.Until.HasValue)
+                    query = query.Where(x => x.Date < rowFilter.Until.Value);
 
-                if (filter.SkipEmptyLines)
+                if (rowFilter.SkipEmptyLines)
                     query = query.Where(x => x.Hours > 0 || x.ActivityCode != null);
 
                 return query.ToArray();

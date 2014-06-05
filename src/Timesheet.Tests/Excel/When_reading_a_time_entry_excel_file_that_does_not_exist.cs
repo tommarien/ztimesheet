@@ -8,14 +8,14 @@ namespace Timesheet.Tests.Excel
     [TestFixture]
     public class When_reading_a_time_entry_excel_file_that_does_not_exist
     {
-        private TimeEntryReader _timeEntryReader;
-        private TimeEntryFilter _filter;
+        private TimeEntryRowReader _timeEntryRowReader;
+        private TimeEntryRowFilter _rowFilter;
 
         [SetUp]
         public void Setup()
         {
-            _timeEntryReader = new TimeEntryReader();
-            _filter = new TimeEntryFilter();
+            _timeEntryRowReader = new TimeEntryRowReader();
+            _rowFilter = new TimeEntryRowFilter();
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace Timesheet.Tests.Excel
         {
             var file = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Files", "Unexisting.xlsm"));
 
-            Should.Throw<FileNotFoundException>(() => _timeEntryReader.Read(file, _filter));
+            Should.Throw<FileNotFoundException>(() => _timeEntryRowReader.Read(file, _rowFilter));
         }
     }
 }

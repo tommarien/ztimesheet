@@ -62,9 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationServicesInstaller.cs" />
-    <Compile Include="Excel\TimeEntry.cs" />
-    <Compile Include="Excel\TimeEntryFilter.cs" />
-    <Compile Include="Excel\TimeEntryReader.cs" />
+    <Compile Include="Excel\TimeEntryRow.cs" />
+    <Compile Include="Excel\TimeEntryRowFilter.cs" />
+    <Compile Include="Excel\TimeEntryRowReader.cs" />
     <Compile Include="Monitor\ConsolidatingFileSystemMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileMonitorService.cs" />

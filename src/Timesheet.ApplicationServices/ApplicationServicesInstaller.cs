@@ -21,7 +21,7 @@ namespace Timesheet.ApplicationServices
                 .DependsOn(Property.ForKey("GracePeriod").Eq(Convert.ToInt32(ConfigurationManager.AppSettings["Monitor.GracePeriod"])))
                 .LifestyleTransient());
 
-            container.Register(Component.For<TimeEntryReader>().LifestyleSingleton());
+            container.Register(Component.For<TimeEntryRowReader>().LifestyleSingleton());
         }
     }
 }

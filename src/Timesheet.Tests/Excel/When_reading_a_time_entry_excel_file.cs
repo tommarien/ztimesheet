@@ -9,8 +9,8 @@ namespace Timesheet.Tests.Excel
     [TestFixture]
     public class When_reading_a_time_entry_excel_file
     {
-        private TimeEntryReader _timeEntryReader;
-        private TimeEntryFilter _filter;
+        private TimeEntryRowReader _timeEntryRowReader;
+        private TimeEntryRowFilter _rowFilter;
         private string _timeEntryExcelFile;
 
         [SetUp]
@@ -18,8 +18,8 @@ namespace Timesheet.Tests.Excel
         {
             _timeEntryExcelFile = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "Files", "Timesheet 2014 JD.xlsm"));
 
-            _timeEntryReader = new TimeEntryReader();
-            _filter = new TimeEntryFilter
+            _timeEntryRowReader = new TimeEntryRowReader();
+            _rowFilter = new TimeEntryRowFilter
             {
                 Until = null,
                 SkipEmptyLines = false
@@ -29,7 +29,7 @@ namespace Timesheet.Tests.Excel
         [Test]
         public void it_skips_heading_lines()
         {
-            var timeEntries = _timeEntryReader.Read(_timeEntryExcelFile, _filter);
+            var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
 
             timeEntries.ShouldNotContain(timeEntry => timeEntry.Date == DateTime.MinValue);
         }
@@ -37,19 +37,19 @@ namespace Timesheet.Tests.Excel
         [Test]
         public void it_reads_up_until_requested_date()
         {
-            _filter.Until = new DateTime(2014, 1, 4);
+            _rowFilter.Until = new DateTime(2014, 1, 4);
 
-            var timeEntries = _timeEntryReader.Read(_timeEntryExcelFile, _filter);
+            var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
 
-            timeEntries.ShouldNotContain(timeEntry => timeEntry.Date >= _filter.Until);
+            timeEntries.ShouldNotContain(timeEntry => timeEntry.Date >= _rowFilter.Until);
         }
 
         [Test]
         public void it_skips_empty_lines_if_requested()
         {
-            _filter.SkipEmptyLines = true;
+            _rowFilter.SkipEmptyLines = true;
 
-            var timeEntries = _timeEntryReader.Read(_timeEntryExcelFile, _filter);
+            var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
 
             timeEntries.ShouldNotContain(timeEntry => timeEntry.Hours.Equals(0) && timeEntry.ActivityCode == null);
         }
@@ -57,9 +57,9 @@ namespace Timesheet.Tests.Excel
         [Test]
         public void it_does_not_skip_empty_lines_with_activity()
         {
-            _filter.SkipEmptyLines = true;
+            _rowFilter.SkipEmptyLines = true;
 
-            var timeEntries = _timeEntryReader.Read(_timeEntryExcelFile, _filter);
+            var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
 
             timeEntries.ShouldContain(timeEntry => timeEntry.Date == new DateTime(2014, 1, 1));
         }
@@ -67,18 +67,18 @@ namespace Timesheet.Tests.Excel
         [Test]
         public void it_reads_the_correct_data()
         {
-            _filter.Until = new DateTime(2014, 1, 4);
+            _rowFilter.Until = new DateTime(2014, 1, 4);
 
-            var timeEntries = _timeEntryReader.Read(_timeEntryExcelFile, _filter);
+            var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
 
             timeEntries.Length.ShouldBe(3);
 
-            EqualTimeEntry(timeEntries[0], new TimeEntry {UserInitials = "JD", ActivityCode = "HOLIDAY", Date = new DateTime(2014, 1, 1), Comment = "NEW YEAR"});
-            EqualTimeEntry(timeEntries[1], new TimeEntry { UserInitials = "JD", ActivityCode = "DEV", Date = new DateTime(2014, 1, 2), Hours = 1.25, CustomerCode = "AMP", ProjectCode = "Flux Standard", WBSCode = "Server", Ticket = "AMP-0001", Comment = "Review tasks done by team" });
-            EqualTimeEntry(timeEntries[2], new TimeEntry { UserInitials = "JD", ActivityCode = "DEV", Date = new DateTime(2014, 1, 3), Hours = 5, Kilometers = 20, CustomerCode = "FACQ", ProjectCode = "POD", WBSCode = "POD", Comment = "Review tasks done by team part II" });
+            EqualTimeEntry(timeEntries[0], new TimeEntryRow {UserInitials = "JD", ActivityCode = "HOLIDAY", Date = new DateTime(2014, 1, 1), Comment = "NEW YEAR"});
+            EqualTimeEntry(timeEntries[1], new TimeEntryRow { UserInitials = "JD", ActivityCode = "DEV", Date = new DateTime(2014, 1, 2), Hours = 1.25, CustomerCode = "AMP", ProjectCode = "Flux Standard", WBSCode = "Server", Ticket = "AMP-0001", Comment = "Review tasks done by team" });
+            EqualTimeEntry(timeEntries[2], new TimeEntryRow { UserInitials = "JD", ActivityCode = "DEV", Date = new DateTime(2014, 1, 3), Hours = 5, Kilometers = 20, CustomerCode = "FACQ", ProjectCode = "POD", WBSCode = "POD", Comment = "Review tasks done by team part II" });
         }
 
-        private void EqualTimeEntry(TimeEntry actual, TimeEntry expected)
+        private void EqualTimeEntry(TimeEntryRow actual, TimeEntryRow expected)
         {
             actual.UserInitials.ShouldBe(expected.UserInitials);
             actual.Date.ShouldBe(expected.Date);

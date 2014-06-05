@@ -3,7 +3,7 @@ using LinqToExcel.Attributes;
 
 namespace Timesheet.ApplicationServices.Excel
 {
-    public class TimeEntry
+    public class TimeEntryRow
     {
         [ExcelColumn("Name")]
         public string UserInitials { get; set; }
