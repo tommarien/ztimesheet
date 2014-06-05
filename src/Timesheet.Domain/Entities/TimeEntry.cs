@@ -15,5 +15,10 @@ namespace Timesheet.Domain.Entities
         public virtual string WBSCode { get; set; }
         public virtual string Ticket { get; set; }
         public virtual string Comment { get; set; }
+
+        public virtual PartitionKey PartitionKey
+        {
+            get { return new PartitionKey(Date, User); }
+        }
     }
 }

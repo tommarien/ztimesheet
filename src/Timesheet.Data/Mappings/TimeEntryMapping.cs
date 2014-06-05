@@ -67,6 +67,16 @@ namespace Timesheet.Data.Mappings
                 m.Column("COMMENT");
                 m.Type(NHibernateUtil.AnsiString);
             });
+
+            Component(x => x.PartitionKey, m =>
+            {
+                m.Access(Accessor.ReadOnly);
+                m.Property(k => k.Value, pm =>
+                {
+                    pm.Column("PARTITION_KEY");
+                    pm.Type(NHibernateUtil.AnsiString);
+                });
+            });
         }
     }
 } ;
