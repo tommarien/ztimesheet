@@ -3,6 +3,6 @@
     public class Partition
     {
         public virtual PartitionKey Key { get; set; }
-        public virtual string CheckSum { get; set; }
+        public virtual string Checksum { get; set; }
     }
 }

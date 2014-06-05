@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checksums\When_generating_checksum_for_a_time_entry.cs" />
+    <Compile Include="Checksums\When_generating_checksum_with_no_data.cs" />
     <Compile Include="Excel\When_reading_a_time_entry_excel_file.cs" />
     <Compile Include="Excel\When_reading_a_time_entry_excel_file_that_does_not_exist.cs" />
     <Compile Include="MappingTests.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Monitor\When_monitoring_for_file_changes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper.cs" />
+    <Compile Include="Checksums\When_generating_checksum_for_a_bunch_of_time_entry_rows.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

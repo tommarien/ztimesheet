@@ -16,7 +16,7 @@ namespace Timesheet.Data.Mappings
                 cm.Type(NHibernateUtil.AnsiString);
             }));
 
-            Property(x => x.CheckSum, m =>
+            Property(x => x.Checksum, m =>
             {
                 m.Column("CHECKSUM");
                 m.Type(NHibernateUtil.AnsiString);
