@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F8834C33-C6DD-49AC-B051-242B985FB8A7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{C54C58DC-C934-495B-A502-3615B9E14919}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Timesheet.Monitor</RootNamespace>
-    <AssemblyName>Timesheet.Monitor</AssemblyName>
+    <RootNamespace>Timesheet.Domain</RootNamespace>
+    <AssemblyName>Timesheet.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,49 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Windsor">
-      <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Topshelf">
-      <HintPath>..\..\packages\Topshelf.3.1.3\lib\net40-full\Topshelf.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Template.app.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Timesheet.ApplicationServices\Timesheet.ApplicationServices.csproj">
-      <Project>{8434812C-3AAD-4AF4-91CE-3A532C6545D5}</Project>
-      <Name>Timesheet.ApplicationServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Timesheet.Data\Timesheet.Data.csproj">
-      <Project>{97F98CE5-8A49-42CD-B38D-79821A38FE27}</Project>
-      <Name>Timesheet.Data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="ConfigBuilder" AssemblyFile="..\..\packages\ConfigBuilder.1.0.5\lib\ConfigBuilderTask.dll" />
-  <Target Name="BuildConfig" BeforeTargets="BeforeBuild">
-    <ConfigBuilder ValuesFilePath="../ConfigValues.xml" ProjectName="$(MSBuildProjectName)" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

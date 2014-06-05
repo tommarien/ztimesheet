@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F8834C33-C6DD-49AC-B051-242B985FB8A7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{97F98CE5-8A49-42CD-B38D-79821A38FE27}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Timesheet.Monitor</RootNamespace>
-    <AssemblyName>Timesheet.Monitor</AssemblyName>
+    <RootNamespace>Timesheet.Data</RootNamespace>
+    <AssemblyName>Timesheet.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -38,43 +36,35 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\packages\Iesi.Collections.3.2.0.1001\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Topshelf">
-      <HintPath>..\..\packages\Topshelf.3.1.3\lib\net40-full\Topshelf.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="DataInstaller.cs" />
+    <Compile Include="NHibernateConfigurationBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Template.app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Timesheet.ApplicationServices\Timesheet.ApplicationServices.csproj">
-      <Project>{8434812C-3AAD-4AF4-91CE-3A532C6545D5}</Project>
-      <Name>Timesheet.ApplicationServices</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Timesheet.Data\Timesheet.Data.csproj">
-      <Project>{97F98CE5-8A49-42CD-B38D-79821A38FE27}</Project>
-      <Name>Timesheet.Data</Name>
+    <ProjectReference Include="..\Timesheet.Domain\Timesheet.Domain.csproj">
+      <Project>{c54c58dc-c934-495b-a502-3615b9e14919}</Project>
+      <Name>Timesheet.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="ConfigBuilder" AssemblyFile="..\..\packages\ConfigBuilder.1.0.5\lib\ConfigBuilderTask.dll" />
-  <Target Name="BuildConfig" BeforeTargets="BeforeBuild">
-    <ConfigBuilder ValuesFilePath="../ConfigValues.xml" ProjectName="$(MSBuildProjectName)" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

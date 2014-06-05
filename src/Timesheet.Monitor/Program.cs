@@ -1,5 +1,6 @@
 ﻿using Castle.Windsor;
 using Timesheet.ApplicationServices;
+using Timesheet.Data;
 using Topshelf;
 
 namespace Timesheet.Monitor
@@ -17,7 +18,7 @@ namespace Timesheet.Monitor
                         s =>
                         {
                             s.ConstructUsing(f => container.Resolve<FileMonitorService>());
-                            
+
                             s.WhenStarted(f => f.Start());
                             s.WhenStopped(f => f.Stop());
 
@@ -37,7 +38,7 @@ namespace Timesheet.Monitor
         {
             var container = new WindsorContainer();
 
-            container.Install(new ApplicationServicesInstaller());
+            container.Install(new DataInstaller(), new ApplicationServicesInstaller());
 
             return container;
         }

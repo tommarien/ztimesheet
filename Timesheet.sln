@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.Migrations", "src\Timesheet.Migrations\Timesheet.Migrations.csproj", "{FB6A29D3-3CC9-4514-8368-A8F4EB0FD456}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.ApplicationServices", "src\Timesheet.ApplicationServices\Timesheet.ApplicationServices.csproj", "{8434812C-3AAD-4AF4-91CE-3A532C6545D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.Monitor", "src\Timesheet.Monitor\Timesheet.Monitor.csproj", "{F8834C33-C6DD-49AC-B051-242B985FB8A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.Domain", "src\Timesheet.Domain\Timesheet.Domain.csproj", "{C54C58DC-C934-495B-A502-3615B9E14919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheet.Data", "src\Timesheet.Data\Timesheet.Data.csproj", "{97F98CE5-8A49-42CD-B38D-79821A38FE27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,14 @@ Global
 		{F8834C33-C6DD-49AC-B051-242B985FB8A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8834C33-C6DD-49AC-B051-242B985FB8A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8834C33-C6DD-49AC-B051-242B985FB8A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54C58DC-C934-495B-A502-3615B9E14919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54C58DC-C934-495B-A502-3615B9E14919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54C58DC-C934-495B-A502-3615B9E14919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54C58DC-C934-495B-A502-3615B9E14919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F98CE5-8A49-42CD-B38D-79821A38FE27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F98CE5-8A49-42CD-B38D-79821A38FE27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F98CE5-8A49-42CD-B38D-79821A38FE27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F98CE5-8A49-42CD-B38D-79821A38FE27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
