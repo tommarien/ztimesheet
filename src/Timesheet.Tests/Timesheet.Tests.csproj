@@ -33,6 +33,12 @@
     <Reference Include="ConfigBuilderTask">
       <HintPath>..\..\packages\ConfigBuilder.1.0.5\lib\ConfigBuilderTask.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\packages\Iesi.Collections.3.2.0.1001\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -51,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Excel\When_reading_a_time_entry_excel_file.cs" />
     <Compile Include="Excel\When_reading_a_time_entry_excel_file_that_does_not_exist.cs" />
+    <Compile Include="MappingTests.cs" />
     <Compile Include="Monitor\When_stopping_to_monitor_for_file_changes.cs" />
     <Compile Include="Monitor\When_monitoring_for_file_changes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +77,10 @@
     <ProjectReference Include="..\Timesheet.ApplicationServices\Timesheet.ApplicationServices.csproj">
       <Project>{8434812C-3AAD-4AF4-91CE-3A532C6545D5}</Project>
       <Name>Timesheet.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Timesheet.Data\Timesheet.Data.csproj">
+      <Project>{97F98CE5-8A49-42CD-B38D-79821A38FE27}</Project>
+      <Name>Timesheet.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

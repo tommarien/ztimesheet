@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataInstaller.cs" />
+    <Compile Include="Mappings\TimeEntryMapping.cs" />
     <Compile Include="NHibernateConfigurationBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

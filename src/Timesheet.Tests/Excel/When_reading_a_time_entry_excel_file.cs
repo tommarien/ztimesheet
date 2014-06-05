@@ -51,7 +51,7 @@ namespace Timesheet.Tests.Excel
 
             var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
 
-            timeEntries.ShouldNotContain(timeEntry => timeEntry.Hours.Equals(0) && timeEntry.ActivityCode == null);
+            timeEntries.ShouldNotContain(timeEntry => timeEntry.Hours.Equals(0) && timeEntry.Activity == null);
         }
 
         [Test]
@@ -73,20 +73,20 @@ namespace Timesheet.Tests.Excel
 
             timeEntries.Length.ShouldBe(3);
 
-            EqualTimeEntry(timeEntries[0], new TimeEntryRow {UserInitials = "JD", ActivityCode = "HOLIDAY", Date = new DateTime(2014, 1, 1), Comment = "NEW YEAR"});
-            EqualTimeEntry(timeEntries[1], new TimeEntryRow { UserInitials = "JD", ActivityCode = "DEV", Date = new DateTime(2014, 1, 2), Hours = 1.25, CustomerCode = "AMP", ProjectCode = "Flux Standard", WBSCode = "Server", Ticket = "AMP-0001", Comment = "Review tasks done by team" });
-            EqualTimeEntry(timeEntries[2], new TimeEntryRow { UserInitials = "JD", ActivityCode = "DEV", Date = new DateTime(2014, 1, 3), Hours = 5, Kilometers = 20, CustomerCode = "FACQ", ProjectCode = "POD", WBSCode = "POD", Comment = "Review tasks done by team part II" });
+            EqualTimeEntry(timeEntries[0], new TimeEntryRow {User = "JD", Activity = "HOLIDAY", Date = new DateTime(2014, 1, 1), Comment = "NEW YEAR"});
+            EqualTimeEntry(timeEntries[1], new TimeEntryRow { User = "JD", Activity = "DEV", Date = new DateTime(2014, 1, 2), Hours = 1.25, Customer = "AMP", Project = "Flux Standard", WBSCode = "Server", Ticket = "AMP-0001", Comment = "Review tasks done by team" });
+            EqualTimeEntry(timeEntries[2], new TimeEntryRow { User = "JD", Activity = "DEV", Date = new DateTime(2014, 1, 3), Hours = 5, Kilometers = 20, Customer = "FACQ", Project = "POD", WBSCode = "POD", Comment = "Review tasks done by team part II" });
         }
 
         private void EqualTimeEntry(TimeEntryRow actual, TimeEntryRow expected)
         {
-            actual.UserInitials.ShouldBe(expected.UserInitials);
+            actual.User.ShouldBe(expected.User);
             actual.Date.ShouldBe(expected.Date);
-            actual.ActivityCode.ShouldBe(expected.ActivityCode);
+            actual.Activity.ShouldBe(expected.Activity);
             actual.Hours.ShouldBe(expected.Hours);
             actual.Kilometers.ShouldBe(expected.Kilometers);
-            actual.CustomerCode.ShouldBe(expected.CustomerCode);
-            actual.ProjectCode.ShouldBe(expected.ProjectCode);
+            actual.Customer.ShouldBe(expected.Customer);
+            actual.Project.ShouldBe(expected.Project);
             actual.WBSCode.ShouldBe(expected.WBSCode);
             actual.Ticket.ShouldBe(expected.Ticket);
             actual.Comment.ShouldBe(expected.Comment);
