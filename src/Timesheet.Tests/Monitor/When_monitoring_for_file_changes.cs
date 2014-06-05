@@ -50,6 +50,9 @@ namespace Timesheet.Tests.Monitor
         public void it_notifies_that_file_did_change_once_if_changed_twice_within_grace_period()
         {
             AppendToFile("file1", "Test");
+            
+            Thread.Sleep(2); // Make sure thread has time to do the work
+            
             AppendToFile("file1", "Test line 2");
 
             Thread.Sleep(_monitor.GracePeriod*2);
