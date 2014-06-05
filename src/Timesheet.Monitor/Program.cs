@@ -1,4 +1,5 @@
-﻿using Castle.Windsor;
+﻿using System.Configuration;
+using Castle.Windsor;
 using Timesheet.ApplicationServices;
 using Timesheet.Data;
 using Topshelf;
@@ -27,8 +28,9 @@ namespace Timesheet.Monitor
 
 
                     config.RunAsLocalSystem();
-                    config.SetServiceName("TimeSheetMonitor");
-                    config.SetDisplayName("Timesheet monitor");
+                    config.SetServiceName(ConfigurationManager.AppSettings["TopShelf.Service.Name"]);
+                    config.SetDisplayName(ConfigurationManager.AppSettings["TopShelf.Service.DisplayName"]);
+                    config.SetDescription(ConfigurationManager.AppSettings["TopShelf.Service.Description"]);
                 });
 
             return (int) exitCode;
