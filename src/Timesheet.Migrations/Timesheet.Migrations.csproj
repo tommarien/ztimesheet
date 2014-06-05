@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default\M0001_Add_TimeEntry_Table.cs" />
+    <Compile Include="Default\M0002_Alter_Comment_On_TimeEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

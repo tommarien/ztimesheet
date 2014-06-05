@@ -64,12 +64,8 @@ namespace Timesheet.Data.Mappings
 
             Property(x => x.Comment, m =>
             {
-                m.Column(cm =>
-                {
-                    cm.Name("COMMENT");
-                    cm.SqlType("varchar(max)");
-                });
-                m.Type(NHibernateUtil.StringClob);
+                m.Column("COMMENT");
+                m.Type(NHibernateUtil.AnsiString);
             });
         }
     }
