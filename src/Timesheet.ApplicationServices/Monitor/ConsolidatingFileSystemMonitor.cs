@@ -29,6 +29,7 @@ namespace Timesheet.ApplicationServices.Monitor
             };
 
             _fileSystemWatcher.Changed += FileSystemWatcherOnChanged;
+            _fileSystemWatcher.Deleted += FileSystemWatcherOnDeleted;
 
             GracePeriod = 75;
         }
@@ -123,6 +124,14 @@ namespace Timesheet.ApplicationServices.Monitor
                 _pendingEvents[e.FullPath] = DateTime.Now;
 
                 if (!_timerStarted) StartTimer();
+            }
+        }
+
+        private void FileSystemWatcherOnDeleted(object sender, FileSystemEventArgs e)
+        {
+            lock (_syncRoot)
+            {
+                _pendingEvents.Remove(e.FullPath);
             }
         }
 

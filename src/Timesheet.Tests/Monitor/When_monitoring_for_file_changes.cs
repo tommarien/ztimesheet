@@ -71,6 +71,18 @@ namespace Timesheet.Tests.Monitor
             _changedFiles.ToArray().ShouldBe(new[] {Path.Combine(TestHelper.WatchRoot, "file1"), Path.Combine(TestHelper.WatchRoot, "file2")});
         }
 
+        [Test]
+        public void it_ignores_new_files_that_were_added_and_removed_within_grace_period()
+        {
+            AppendToFile("file1", "Test");
+            Thread.Sleep(2);
+            
+            File.Delete(Path.Combine(TestHelper.WatchRoot, "file1"));
+            Thread.Sleep(_monitor.GracePeriod * 2);
+
+            _changedFiles.ShouldBeEmpty();
+        }
+
         private void AppendToFile(string fileName, string line)
         {
             using (var stream = new StreamWriter(Path.Combine(TestHelper.WatchRoot, fileName), true))
