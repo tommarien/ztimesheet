@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using LinqToExcel;
 
@@ -14,7 +15,7 @@ namespace Timesheet.ApplicationServices.Excel
             using (var excelQueryFactory = new ExcelQueryFactory(fileName))
             {
                 IQueryable<TimeEntry> query = excelQueryFactory.Worksheet<TimeEntry>("Data")
-                    .Where(x => x.Week > 0);
+                    .Where(x => x.Date != DateTime.MinValue);
 
                 if (filter.Until.HasValue)
                     query = query.Where(x => x.Date < filter.Until.Value);

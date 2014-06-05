@@ -31,7 +31,7 @@ namespace Timesheet.Tests.Excel
         {
             var timeEntries = _timeEntryReader.Read(_timeEntryExcelFile, _filter);
 
-            timeEntries.ShouldNotContain(timeEntry => timeEntry.Week == 0);
+            timeEntries.ShouldNotContain(timeEntry => timeEntry.Date == DateTime.MinValue);
         }
 
         [Test]

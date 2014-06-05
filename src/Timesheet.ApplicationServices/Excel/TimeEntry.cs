@@ -8,8 +8,6 @@ namespace Timesheet.ApplicationServices.Excel
         [ExcelColumn("Name")]
         public string UserInitials { get; set; }
 
-        public int Week { get; set; }
-        public string Day { get; set; }
         public DateTime Date { get; set; }
 
         [ExcelColumn("Type")]
