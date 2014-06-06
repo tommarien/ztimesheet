@@ -20,7 +20,7 @@ namespace Timesheet.ApplicationServices.Excel
                     .Where(x => x.Date != DateTime.MinValue);
 
                 if (rowFilter.Until.HasValue)
-                    query = query.Where(x => x.Date < rowFilter.Until.Value);
+                    query = query.Where(x => x.Date <= rowFilter.Until.Value);
 
                 entries = query.ToArray();
             }

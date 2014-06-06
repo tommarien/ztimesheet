@@ -61,7 +61,7 @@ namespace Timesheet.Tests.Excel
 
             var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
 
-            timeEntries.ShouldNotContain(timeEntry => timeEntry.Date >= _rowFilter.Until);
+            timeEntries.ShouldNotContain(timeEntry => timeEntry.Date > _rowFilter.Until);
         }
 
         [Test]
@@ -87,15 +87,15 @@ namespace Timesheet.Tests.Excel
         [Test]
         public void it_reads_the_correct_data()
         {
-            _rowFilter.Until = new DateTime(2014, 1, 4);
+            _rowFilter.Until = new DateTime(2014, 1, 3);
 
             var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
 
             timeEntries.Length.ShouldBe(3);
 
             EqualTimeEntry(timeEntries[0], new TimeEntryRow {User = "JD", Activity = "HOLIDAY", Date = new DateTime(2014, 1, 1), Comment = "NEW YEAR"});
-            EqualTimeEntry(timeEntries[1], new TimeEntryRow { User = "JD", Activity = "DEV", Date = new DateTime(2014, 1, 2), Hours = 1.25, Customer = "AMP", Project = "Flux Standard", WBSCode = "Server", Ticket = "AMP-0001", Comment = "Review tasks done by team" });
-            EqualTimeEntry(timeEntries[2], new TimeEntryRow { User = "JD", Activity = "DEV", Date = new DateTime(2014, 1, 3), Hours = 5, Kilometers = 20, Customer = "FACQ", Project = "POD", WBSCode = "POD", Comment = "Review tasks done by team part II" });
+            EqualTimeEntry(timeEntries[1], new TimeEntryRow {User = "JD", Activity = "DEV", Date = new DateTime(2014, 1, 2), Hours = 1.25, Customer = "AMP", Project = "Flux Standard", WBSCode = "Server", Ticket = "AMP-0001", Comment = "Review tasks done by team"});
+            EqualTimeEntry(timeEntries[2], new TimeEntryRow {User = "JD", Activity = "DEV", Date = new DateTime(2014, 1, 3), Hours = 5, Kilometers = 20, Customer = "FACQ", Project = "POD", WBSCode = "POD", Comment = "Review tasks done by team part II"});
         }
 
         private void EqualTimeEntry(TimeEntryRow actual, TimeEntryRow expected)
