@@ -5,6 +5,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Timesheet.ApplicationServices.Excel;
 using Timesheet.ApplicationServices.Monitor;
+using Timesheet.ApplicationServices.Processor;
 
 namespace Timesheet.ApplicationServices
 {
@@ -13,6 +14,12 @@ namespace Timesheet.ApplicationServices
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<FileMonitorService>()
+                .LifestyleTransient());
+
+            container.Register(Component.For<TimeEntryProcessor>()
+                .LifestyleTransient());
+
+            container.Register(Component.For<TaskScheduler>()
                 .LifestyleTransient());
 
             container.Register(Component.For<ConsolidatingFileSystemMonitor>()

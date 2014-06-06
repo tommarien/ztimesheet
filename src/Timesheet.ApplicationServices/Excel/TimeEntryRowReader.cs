@@ -20,9 +20,6 @@ namespace Timesheet.ApplicationServices.Excel
                 if (rowFilter.Until.HasValue)
                     query = query.Where(x => x.Date < rowFilter.Until.Value);
 
-                if (rowFilter.SkipEmptyLines)
-                    query = query.Where(x => x.Hours > 0 || x.Activity != null);
-
                 return query.ToArray();
             }
         }

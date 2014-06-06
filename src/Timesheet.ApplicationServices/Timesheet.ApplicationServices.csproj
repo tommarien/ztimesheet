@@ -75,6 +75,7 @@
     <Compile Include="Processor\TimeEntryProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileMonitorService.cs" />
+    <Compile Include="TaskScheduler.cs" />
     <Compile Include="TimeEntryRowExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -65,6 +65,7 @@
     <Compile Include="Monitor\When_monitoring_for_file_changes.cs" />
     <Compile Include="Processor\IntegrationTestBase.cs" />
     <Compile Include="Processor\When_processing_time_entries_with_an_empty_db.cs" />
+    <Compile Include="Scheduling\TaskSchedulerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper.cs" />
   </ItemGroup>
