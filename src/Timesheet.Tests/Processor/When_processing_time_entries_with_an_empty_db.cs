@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using NHibernate;
 using NHibernate.Linq;
 using NUnit.Framework;
 using Shouldly;
@@ -73,11 +74,27 @@ namespace Timesheet.Tests.Processor
 
         public TimeEntryRow[] ExcelRecords { get; private set; }
 
-        [Test]
-        public void it_should_add_the_records_to_the_db()
+        private void Act()
         {
             var processor = new TimeEntryProcessor(SessionFactory);
             processor.Process(ExcelRecords);
+        }
+
+        [Test]
+        public void it_should_add_partition_key_to_the_db()
+        {
+            Act();
+
+            using (var session = SessionFactory.OpenStatelessSession())
+            {
+                session.Query<Partition>().Count().ShouldBe(3);
+            }
+        }
+
+        [Test]
+        public void it_should_add_time_entries_to_the_db()
+        {
+            Act();
 
             using (var session = SessionFactory.OpenStatelessSession())
             {
