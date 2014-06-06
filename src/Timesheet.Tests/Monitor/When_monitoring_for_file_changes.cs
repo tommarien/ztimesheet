@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading;
 using NUnit.Framework;
 using Shouldly;
@@ -25,6 +26,7 @@ namespace Timesheet.Tests.Monitor
             _changedFiles = new List<string>();
 
             _monitor = new ConsolidatingFileSystemMonitor(TestHelper.WatchRoot, "*.*");
+            _monitor.GracePeriod = 250;
             _monitor.WhenFileChanged(_changedFiles.Add);
             _monitor.Start();
         }
