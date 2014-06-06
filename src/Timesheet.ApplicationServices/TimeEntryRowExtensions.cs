@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json;
 using Timesheet.ApplicationServices.Excel;
+using Timesheet.Domain.Entities;
 
 namespace Timesheet.ApplicationServices
 {
@@ -24,6 +25,26 @@ namespace Timesheet.ApplicationServices
 
                 return base64String;
             }
+        }
+
+        public static TimeEntry CreateTimeEntry(this TimeEntryRow row)
+        {
+            if (row == null) throw new ArgumentNullException("row");
+
+            var entry = new TimeEntry
+            {
+                User = row.User,
+                Date = row.Date,
+                Activity = row.Activity,
+                Hours = row.Hours,
+                Kilometers = row.Kilometers,
+                Customer = row.Customer,
+                Project = row.Project,
+                WBSCode = row.WBSCode,
+                Ticket = row.Ticket,
+                Comment = row.Comment
+            };
+            return entry;
         }
     }
 }

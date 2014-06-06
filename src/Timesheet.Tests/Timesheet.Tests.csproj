@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checksums\When_generating_checksum_for_a_bunch_of_time_entry_rows.cs" />
     <Compile Include="Checksums\When_generating_checksum_for_a_time_entry.cs" />
     <Compile Include="Checksums\When_generating_checksum_with_no_data.cs" />
     <Compile Include="Excel\When_reading_a_time_entry_excel_file.cs" />
@@ -62,9 +63,10 @@
     <Compile Include="MappingTests.cs" />
     <Compile Include="Monitor\When_stopping_to_monitor_for_file_changes.cs" />
     <Compile Include="Monitor\When_monitoring_for_file_changes.cs" />
+    <Compile Include="Processor\IntegrationTestBase.cs" />
+    <Compile Include="Processor\When_processing_time_entries_with_an_empty_db.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper.cs" />
-    <Compile Include="Checksums\When_generating_checksum_for_a_bunch_of_time_entry_rows.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -84,6 +86,10 @@
     <ProjectReference Include="..\Timesheet.Data\Timesheet.Data.csproj">
       <Project>{97F98CE5-8A49-42CD-B38D-79821A38FE27}</Project>
       <Name>Timesheet.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Timesheet.Domain\Timesheet.Domain.csproj">
+      <Project>{C54C58DC-C934-495B-A502-3615B9E14919}</Project>
+      <Name>Timesheet.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
