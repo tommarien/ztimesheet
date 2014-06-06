@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using NHibernate;
 using NHibernate.Linq;
 using NUnit.Framework;
 using Shouldly;
+using Timesheet.ApplicationServices;
 using Timesheet.ApplicationServices.Excel;
 using Timesheet.ApplicationServices.Processor;
 using Timesheet.Domain.Entities;
@@ -11,7 +11,7 @@ using Timesheet.Domain.Entities;
 namespace Timesheet.Tests.Processor
 {
     [TestFixture]
-    public class When_processing_time_entries_with_an_empty_db : IntegrationTestBase
+    public class When_processing_new_time_entries : IntegrationTestBase
     {
         protected override void AfterTestFixtureSetup()
         {
@@ -81,7 +81,7 @@ namespace Timesheet.Tests.Processor
         }
 
         [Test]
-        public void it_should_add_partition_key_to_the_db()
+        public void it_should_add_partition_keys_to_the_db()
         {
             Act();
 
@@ -100,6 +100,60 @@ namespace Timesheet.Tests.Processor
             {
                 session.Query<TimeEntry>().Count().ShouldBe(ExcelRecords.Length);
             }
+        }
+
+        [Test]
+        public void it_should_add_time_entries_with_correct_data()
+        {
+            Act();
+
+            using (var session = SessionFactory.OpenStatelessSession())
+            {
+                var entries = session.Query<TimeEntry>().ToList();
+
+                var entry1 = entries.FirstOrDefault(e => e.Date == new DateTime(2001, 1, 1) && e.Activity == "DEV");
+                var entry2 = entries.FirstOrDefault(e => e.Date == new DateTime(2001, 1, 1) && e.Activity == "ANA");
+                var entry3 = entries.FirstOrDefault(e => e.Date == new DateTime(2001, 1, 2) && e.User == "JD");
+                var entry4 = entries.FirstOrDefault(e => e.Date == new DateTime(2001, 1, 2) && e.User == "AB");
+
+                EqualTimeEntry(entry1, ExcelRecords[0]);
+                EqualTimeEntry(entry2, ExcelRecords[1]);
+                EqualTimeEntry(entry3, ExcelRecords[2]);
+                EqualTimeEntry(entry4, ExcelRecords[3]);
+            }
+        }
+
+        [Test]
+        public void it_should_add_partition_keys_with_correct_data()
+        {
+            Act();
+
+            using (var session = SessionFactory.OpenStatelessSession())
+            {
+                var partitionKeys = session.Query<Partition>();
+
+                var key1 = partitionKeys.FirstOrDefault(k => k.Key.Value == "20010101|JD");
+                var key2 = partitionKeys.FirstOrDefault(k => k.Key.Value == "20010102|JD");
+                var key3 = partitionKeys.FirstOrDefault(k => k.Key.Value == "20010102|AB");
+
+                key1.Checksum.ShouldBe(ExcelRecords.Where(x => x.Date == new DateTime(2001, 1, 1) && x.User == "JD").GenerateChecksum());
+                key2.Checksum.ShouldBe(ExcelRecords.Where(x => x.Date == new DateTime(2001, 1, 2) && x.User == "JD").GenerateChecksum());
+                key3.Checksum.ShouldBe(ExcelRecords.Where(x => x.Date == new DateTime(2001, 1, 2) && x.User == "AB").GenerateChecksum());
+            }
+        }
+
+        private void EqualTimeEntry(TimeEntry actual, TimeEntryRow expected)
+        {
+            actual.User.ShouldBe(expected.User);
+            actual.Date.ShouldBe(expected.Date);
+            actual.Activity.ShouldBe(expected.Activity);
+            actual.Hours.ShouldBe(expected.Hours);
+            actual.Kilometers.ShouldBe(expected.Kilometers);
+            actual.Customer.ShouldBe(expected.Customer);
+            actual.Project.ShouldBe(expected.Project);
+            actual.WBSCode.ShouldBe(expected.WBSCode);
+            actual.Ticket.ShouldBe(expected.Ticket);
+            actual.Comment.ShouldBe(expected.Comment);
         }
     }
 }

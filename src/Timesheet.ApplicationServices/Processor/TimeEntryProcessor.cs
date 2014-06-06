@@ -11,6 +11,7 @@ namespace Timesheet.ApplicationServices.Processor
 {
     public class TimeEntryProcessor
     {
+        private const int DefaultBatchSize = 100;
         private readonly ISessionFactory _sessionFactory;
 
         public TimeEntryProcessor(ISessionFactory sessionFactory)
@@ -36,7 +37,7 @@ namespace Timesheet.ApplicationServices.Processor
                     .ToList();
 
             var impactedPartitionKeys = impactedPartitions.Select(p => p.PartitionKey).ToList();
-            using (var session = _sessionFactory.OpenStatelessSession().SetBatchSize(10))
+            using (var session = _sessionFactory.OpenStatelessSession().SetBatchSize(DefaultBatchSize))
             using (var tx = session.BeginTransaction(IsolationLevel.ReadCommitted))
             {
                 try

@@ -1,9 +1,6 @@
 ﻿using NHibernate;
-using NHibernate.Cfg;
 using NUnit.Framework;
 using Timesheet.Data;
-using Timesheet.Data.Mappings;
-using Timesheet.Domain;
 using Timesheet.Domain.Entities;
 
 namespace Timesheet.Tests.Processor
@@ -47,7 +44,7 @@ namespace Timesheet.Tests.Processor
             AfterTestFixtureTearDown();
         }
 
-        private void CleanupDatabase()
+        protected void CleanupDatabase()
         {
             using (var session = SessionFactory.OpenSession())
             {
@@ -62,6 +59,12 @@ namespace Timesheet.Tests.Processor
 
         protected virtual void AfterTestFixtureTearDown()
         {
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            CleanupDatabase();
         }
     }
 }
