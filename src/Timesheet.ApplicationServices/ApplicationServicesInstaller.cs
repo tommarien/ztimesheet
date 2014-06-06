@@ -13,7 +13,7 @@ namespace Timesheet.ApplicationServices
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<FileMonitorService>()
+            container.Register(Component.For<TimesheetProcessingService>()
                 .LifestyleTransient());
 
             container.Register(Component.For<TimeEntryProcessor>()

@@ -17,9 +17,9 @@
         <ConfigParameterValue Environment="DEV" Value="C:\Temp\TimesheetDropFolder" />
       </Values>
     </ConfigParameter>
-    <ConfigParameter Name="MonitorFilter"  Default="Timesheet*.xls*" />
-    <ConfigParameter Name="MonitorGracePeriod"  Default="2000" />
-    <ConfigParameter Name="MonitorLoggingDirectory"  Default="${basedir}/Logs" />
-    <ConfigParameter Name="MonitorLoggingMinLevel"  Default="Debug" />
+    <ConfigParameter Name="MonitorFilter" Default="Timesheet*.xls*" />
+    <ConfigParameter Name="MonitorGracePeriod" Default="2000" />
+    <ConfigParameter Name="MonitorLoggingDirectory" Default="${basedir}/Logs" />
+    <ConfigParameter Name="MonitorLoggingMinLevel" Default="Debug" />
   </Parameters>
 </ConfigValues>

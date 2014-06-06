@@ -35,6 +35,26 @@ namespace Timesheet.Tests.Excel
         }
 
         [Test]
+        public void it_skips_heading_lines_even_if_we_specify_until()
+        {
+            _rowFilter.Until = new DateTime(2014, 1, 4);
+
+            var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
+
+            timeEntries.ShouldNotContain(timeEntry => timeEntry.Date == DateTime.MinValue);
+        }
+
+        [Test]
+        public void it_skips_heading_lines_even_if_we_specify_skip_empty_lines()
+        {
+            _rowFilter.SkipEmptyLines = true;
+
+            var timeEntries = _timeEntryRowReader.Read(_timeEntryExcelFile, _rowFilter);
+
+            timeEntries.ShouldNotContain(timeEntry => timeEntry.Date == DateTime.MinValue);
+        }
+
+        [Test]
         public void it_reads_up_until_requested_date()
         {
             _rowFilter.Until = new DateTime(2014, 1, 4);

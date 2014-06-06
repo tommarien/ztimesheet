@@ -16,10 +16,10 @@ namespace Timesheet.Monitor
             TopshelfExitCode exitCode = HostFactory.Run(
                 config =>
                 {
-                    config.Service<FileMonitorService>(
+                    config.Service<TimesheetProcessingService>(
                         s =>
                         {
-                            s.ConstructUsing(f => container.Resolve<FileMonitorService>());
+                            s.ConstructUsing(f => container.Resolve<TimesheetProcessingService>());
 
                             s.WhenStarted(f => f.Start());
                             s.WhenStopped(f => f.Stop());
