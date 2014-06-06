@@ -15,7 +15,7 @@ namespace Timesheet.ApplicationServices
 
             var task = Task.Factory
                 .StartNew(action)
-                .ContinueWith((t) => Remove(taskId));
+                .ContinueWith((t) => AfterExecution(t, taskId));
 
             _tasks.TryAdd(taskId, task);
 
@@ -37,10 +37,13 @@ namespace Timesheet.ApplicationServices
             Task.WaitAll(_tasks.Values.ToArray());
         }
 
-        private void Remove(Guid key)
+        private void AfterExecution(Task ancestor, Guid key)
         {
             Task removedTask;
             _tasks.TryRemove(key, out removedTask);
+
+            if (ancestor.IsFaulted)
+                throw ancestor.Exception;
         }
 
         public int AmountOfPendingTasks

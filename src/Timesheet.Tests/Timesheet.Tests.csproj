@@ -65,9 +65,10 @@
     <Compile Include="Monitor\When_monitoring_for_file_changes.cs" />
     <Compile Include="Processor\IntegrationTestBase.cs" />
     <Compile Include="Processor\When_processing_modified_time_entries.cs" />
-    <Compile Include="Scheduling\TaskSchedulerTests.cs" />
     <Compile Include="Processor\When_processing_new_time_entries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scheduling\When_a_task_is_scheduled.cs" />
+    <Compile Include="Scheduling\When_tasks_are_scheduled.cs" />
     <Compile Include="TestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
