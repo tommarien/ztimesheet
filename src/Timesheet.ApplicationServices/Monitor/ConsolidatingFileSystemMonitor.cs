@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Castle.Core.Logging;
 
 namespace Timesheet.ApplicationServices.Monitor
 {
@@ -14,6 +15,7 @@ namespace Timesheet.ApplicationServices.Monitor
         private readonly object _syncRoot = new object();
         private readonly Timer _timer;
         private bool _timerStarted;
+        private ILogger _logger = NullLogger.Instance;
 
         public ConsolidatingFileSystemMonitor(string path, string filter)
         {
@@ -30,8 +32,15 @@ namespace Timesheet.ApplicationServices.Monitor
 
             _fileSystemWatcher.Changed += FileSystemWatcherOnChanged;
             _fileSystemWatcher.Deleted += FileSystemWatcherOnDeleted;
+            _fileSystemWatcher.Error += FileSystemWatcherOnError;
 
-            GracePeriod = 75;
+            GracePeriod = 1500;
+        }
+
+        public ILogger Logger
+        {
+            get { return _logger; }
+            set { _logger = value; }
         }
 
         /// <summary>
@@ -80,8 +89,15 @@ namespace Timesheet.ApplicationServices.Monitor
                 var pendingChanges = _pendingEvents.Keys.ToList();
 
                 pendingChanges.ForEach(path => _pendingEvents.Remove(path));
-                pendingChanges.ForEach(path => _whenFileChanged(path));
+                pendingChanges.ForEach(NotifyChanged);
             }
+        }
+
+        private void NotifyChanged(string path)
+        {
+            Logger.Debug(() => string.Format("Notifying changed file '{0}'", path));
+
+            _whenFileChanged(path);
         }
 
         private void ProcessPendingEvents()
@@ -99,7 +115,7 @@ namespace Timesheet.ApplicationServices.Monitor
 
                 if (_pendingEvents.Count == 0) StopTimer();
 
-                changesThatHavePassedGracePeriod.ForEach(path => _whenFileChanged(path));
+                changesThatHavePassedGracePeriod.ForEach(NotifyChanged);
             }
         }
 
@@ -133,6 +149,11 @@ namespace Timesheet.ApplicationServices.Monitor
             {
                 _pendingEvents.Remove(e.FullPath);
             }
+        }
+
+        private void FileSystemWatcherOnError(object sender, ErrorEventArgs e)
+        {
+            Logger.Error("FileSystemWatcher caught an error", e.GetException());
         }
 
         private void StartTimer()

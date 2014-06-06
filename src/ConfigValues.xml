@@ -3,18 +3,23 @@
     <CreateConfigTask NameFormat="App.config" InputFile="./Template.App.config" OutputFolderFormat="./Configuration/{0}/" />
   </Tasks>
   <Parameters>
+    <!-- Connection strings -->
     <ConfigParameter Name="TimesheetConnectionString">
       <Values>
         <ConfigParameterValue Environment="DEV" Value="Server=.\SQLEXPRESS;Database=Zetes_Timesheet;Integrated Security=true;" />
       </Values>
     </ConfigParameter>
     <ConfigParameter Name="TimesheetTestConnectionString" Default="Server=.\SQLEXPRESS;Database=Zetes_Timesheet_Test;Integrated Security=true;" />
+   
+    <!-- Monitor Settings -->
     <ConfigParameter Name="MonitorPath">
       <Values>
         <ConfigParameterValue Environment="DEV" Value="C:\Temp\TimesheetDropFolder" />
       </Values>
     </ConfigParameter>
     <ConfigParameter Name="MonitorFilter"  Default="Timesheet*.xls*" />
-    <ConfigParameter Name="MonitorGracePeriod"  Default="250" />
+    <ConfigParameter Name="MonitorGracePeriod"  Default="2000" />
+    <ConfigParameter Name="MonitorLoggingDirectory"  Default="${basedir}/Logs" />
+    <ConfigParameter Name="MonitorLoggingMinLevel"  Default="Debug" />
   </Parameters>
 </ConfigValues>

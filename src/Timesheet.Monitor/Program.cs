@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using Castle.Facilities.Logging;
 using Castle.Windsor;
 using Timesheet.ApplicationServices;
 using Timesheet.Data;
@@ -39,6 +40,8 @@ namespace Timesheet.Monitor
         private static IWindsorContainer CreateContainer()
         {
             var container = new WindsorContainer();
+
+            container.AddFacility<LoggingFacility>(f => f.UseNLog().WithAppConfig());
 
             container.Install(new DataInstaller(), new ApplicationServicesInstaller());
 
