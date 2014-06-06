@@ -21,6 +21,8 @@ namespace Timesheet.Data.Mappings
                 m.Column("CHECKSUM");
                 m.Type(NHibernateUtil.AnsiString);
             });
+
+            Property(x => x.Revision, m => m.Column("REV"));
         }
     }
 }

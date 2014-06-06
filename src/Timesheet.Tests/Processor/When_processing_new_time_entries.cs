@@ -139,6 +139,8 @@ namespace Timesheet.Tests.Processor
                 key1.Checksum.ShouldBe(ExcelRecords.Where(x => x.Date == new DateTime(2001, 1, 1) && x.User == "JD").GenerateChecksum());
                 key2.Checksum.ShouldBe(ExcelRecords.Where(x => x.Date == new DateTime(2001, 1, 2) && x.User == "JD").GenerateChecksum());
                 key3.Checksum.ShouldBe(ExcelRecords.Where(x => x.Date == new DateTime(2001, 1, 2) && x.User == "AB").GenerateChecksum());
+
+                partitionKeys.ShouldAllBe(p => p.Revision == 1);
             }
         }
 

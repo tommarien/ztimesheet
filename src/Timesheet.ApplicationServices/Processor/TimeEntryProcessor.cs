@@ -70,6 +70,7 @@ namespace Timesheet.ApplicationServices.Processor
                         {
                             var storePartition = storedPartitions.Single(x => Equals(x.Key, partition.PartitionKey));
                             storePartition.Checksum = partition.Checksum;
+                            storePartition.Revision += 1;
                             session.Update(storePartition);
                         }
                     }

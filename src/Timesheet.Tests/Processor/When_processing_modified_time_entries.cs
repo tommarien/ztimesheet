@@ -90,12 +90,12 @@ namespace Timesheet.Tests.Processor
                 ExistingPartitionKey = (PartitionKey)session.Insert(new Partition
                 {
                     Key = new PartitionKey(row1.Date, row1.User),
-                    Checksum = new[] {row1, row2}.GenerateChecksum()
+                    Checksum = new[] { row1, row2 }.GenerateChecksum()
                 });
 
                 var entry1 = (Guid)session.Insert(row1.CreateTimeEntry());
                 var entry2 = (Guid)session.Insert(row2.CreateTimeEntry());
-                ExistingTimeEntryIds = new[] {entry1, entry2};
+                ExistingTimeEntryIds = new[] { entry1, entry2 };
             }
         }
 
@@ -187,6 +187,18 @@ namespace Timesheet.Tests.Processor
             {
                 var existingPartition = session.Get<Partition>(ExistingPartitionKey);
                 existingPartition.Checksum.ShouldBe(ExcelRecords.Where(x => x.Date == new DateTime(2001, 1, 1) && x.User == "JD").GenerateChecksum());
+            }
+        }
+
+        [Test]
+        public void it_should_update_existing_partitions_revision()
+        {
+            Act();
+
+            using (var session = SessionFactory.OpenStatelessSession())
+            {
+                var existingPartition = session.Get<Partition>(ExistingPartitionKey);
+                existingPartition.Revision.ShouldBe(2);
             }
         }
 
