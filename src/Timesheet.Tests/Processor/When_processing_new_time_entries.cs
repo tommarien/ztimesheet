@@ -13,7 +13,7 @@ namespace Timesheet.Tests.Processor
     [TestFixture]
     public class When_processing_new_time_entries : IntegrationTestBase
     {
-        protected override void AfterTestFixtureSetup()
+        protected override void AfterSetUp()
         {
             ExcelRecords = new[]
             {

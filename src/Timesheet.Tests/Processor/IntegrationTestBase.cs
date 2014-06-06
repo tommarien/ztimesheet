@@ -64,7 +64,35 @@ namespace Timesheet.Tests.Processor
         [TearDown]
         public void TearDown()
         {
+            BeforeTearDown();
+
             CleanupDatabase();
+
+            AfterTearDown();
+        }
+
+        protected virtual void AfterTearDown()
+        {
+        }
+
+        protected virtual void BeforeTearDown()
+        {
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            BeforeSetUp();
+
+            AfterSetUp();
+        }
+
+        protected virtual void AfterSetUp()
+        {
+        }
+
+        protected virtual void BeforeSetUp()
+        {
         }
     }
 }
