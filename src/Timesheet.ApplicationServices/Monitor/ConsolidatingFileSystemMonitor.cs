@@ -102,11 +102,13 @@ namespace Timesheet.ApplicationServices.Monitor
 
         private void ProcessPendingEvents()
         {
+            List<string> changesThatHavePassedGracePeriod;
+
             lock (_syncRoot)
             {
                 DateTime now = DateTime.Now;
 
-                var changesThatHavePassedGracePeriod = _pendingEvents
+                changesThatHavePassedGracePeriod = _pendingEvents
                     .Where(x => now.Subtract(x.Value).TotalMilliseconds >= GracePeriod)
                     .Select(x => x.Key)
                     .ToList();
@@ -114,9 +116,9 @@ namespace Timesheet.ApplicationServices.Monitor
                 changesThatHavePassedGracePeriod.ForEach(path => _pendingEvents.Remove(path));
 
                 if (_pendingEvents.Count == 0) StopTimer();
-
-                changesThatHavePassedGracePeriod.ForEach(NotifyChanged);
             }
+
+            changesThatHavePassedGracePeriod.ForEach(NotifyChanged);
         }
 
         public void Dispose()
